@@ -24,46 +24,46 @@
     -->
     <item
         android:id="@+id/edit_action"
-        android:title="Editar"
+        android:title="@string/edit_item"
         android:icon="@drawable/ic_baseline_edit_24"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/delete_action"
-        android:title="Borrar"
+        android:title="@string/delete_item"
         android:icon="@drawable/ic_baseline_delete_24"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/share_action"
-        android:title="Compartir"
+        android:title="@string/share_item"
         android:icon="@drawable/ic_baseline_share_24"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/create_pdf_action"
         android:icon="@drawable/ic_baseline_picture_as_pdf_24"
         app:showAsAction="ifRoom"
-        android:title="PDF" />
+        android:title="@string/pdf_item" />
     <item
         android:id="@+id/print_action"
-        android:title="Imprimir" />
+        android:title="@string/print_item" />
     <item
         android:id="@+id/send_action"
-        android:title="Enviar" />
+        android:title="@string/send_item" />
 
     <!-- Elementos checked -->
     <item
         android:id="@+id/modo_nocturno"
         android:checkable="true"
         android:checked="false"
-        android:title="Modo nocturno" />
+        android:title="@string/modo_nocturno_item" />
 
     <!-- Podemos tener tambien submenu -->
     <item
-        android:title="Sección">
+        android:title="@string/section_item">
         <menu>
-            <item android:id="@+id/op1" android:title="Opción 1" />
-            <item android:id="@+id/op2" android:title="Opción 2" />
-            <item android:id="@+id/op3" android:title="Opción 3" />
-            <item android:id="@+id/op4" android:title="Opción 4" />
+            <item android:id="@+id/op1" android:title="@string/op1_item" />
+            <item android:id="@+id/op2" android:title="@string/op2_item" />
+            <item android:id="@+id/op3" android:title="@string/op3_item" />
+            <item android:id="@+id/op4" android:title="@string/op4_item" />
         </menu>
     </item>
 </menu>

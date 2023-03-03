@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">13_Menu01</string>
+    <string name="title">2 DAM D.Interfaces Proyecto 2T</string>
+    <string name="edit_item">Editar</string>
+    <string name="delete_item">Borrar</string>
+    <string name="share_item">Compartir</string>
+    <string name="pdf_item">PDF</string>
+    <string name="print_item">Imprimir</string>
+    <string name="send_item">Enviar</string>
+    <string name="modo_nocturno_item">Modo nocturno</string>
+    <string name="section_item">Sección</string>
+    <string name="op1_item">Opción 1</string>
+    <string name="op2_item">Opción 2</string>
+    <string name="op3_item">Opción 3</string>
+    <string name="op4_item">Opción 4</string>
+    <string name="ej_menu_android">Ejemplo Menu Android</string>
 </resources>

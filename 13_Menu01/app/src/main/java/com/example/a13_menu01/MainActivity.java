@@ -7,39 +7,50 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.CheckBox;
 import android.widget.Toast;
 
+/**
+ * Main activity.
+ *
+ * @author Kiol12 and Jkutkut
+ */
 public class MainActivity extends AppCompatActivity {
 
     MenuItem modoNocturno;
 
-    /*
-    En este ejemplo vamos a ver como podemos trabajar con un menu de
-    opciones en android
+    private final int[] OPCIONES = {
+            R.id.op1,
+            R.id.op2,
+            R.id.op3,
+            R.id.op4
+    };
 
-    En primer lugar, debes ubicar crear un archivo de menú y ubicarlo en la carpeta
-    res/menu/nombre_archivo.xml.
+    private final int[] BASICOS = {
+            R.id.edit_action,
+            R.id.delete_action,
+            R.id.share_action,
+            R.id.create_pdf_action,
+            R.id.print_action,
+            R.id.send_action
+    };
 
-    Desde Android Studio se resume a dar click derecho en tu carpeta res y luego seleccionar
-    New > Android Resource File.
-
-    Al desplegarse la ventana de configuración, selecciona "Menu" en el tipo de recursos y
-    luego ponemos su nombre "main_menu"
-
-    Podemos crear los dibujos en New > Vector Asset en la carpeta de drawable
-    */
+    /**
+     * On create methos.
+     * @param savedInstanceState The saved instance state.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        setTitle(getString(R.string.title));
     }
 
-    //Este metodo se llamara cuando se cree la actividad e inflaremos el menu
-    //El parametro menu sera el objeto donde inflaremos el layout, que nos lo
-    //crea android
-
-    //En el valor de retorno decimos si queremos mostrar el menu o no
+    /**
+     * On create options menu. Inflates the menu with the main_menu.xml file and the style.
+     * @param menu The menu created
+     * @return True if the menu is created.
+     */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
@@ -48,30 +59,33 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    //Con este método detectaremos que opción del menú ha sido pulsada
-    //el parametro MenuItem representa el objeto que fue seleccionado, no puede ser null
-    //En el valor de retorno decimos si queremos procesar el elemento en este metodo o no
+    /**
+     * On options item selected. Shows a toast with the selected option.
+     * @param item The selected item.
+     * @return True if the item is selected.
+     */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.edit_action) {
-            alert("Ha pulsado " + item.getTitle().toString());
-        }else if(id == R.id.modo_nocturno){
+        if(id == R.id.modo_nocturno){
             if (item.isChecked())
                 alert("Activando modo nocturno!");
             else
                 alert("Desactivando modo nocturno!");
             toggleDarkLightMode();
-            return true;
-        }else if(id == R.id.op1){
-            Toast.makeText(this,"Opcion 1 elegida!",Toast.LENGTH_SHORT).show();
-            return true;
         }
-
+        else if (any(id, BASICOS))
+            alert(String.format("Ha pulsado %s", item.getTitle()));
+        else if(any(id, OPCIONES))
+            alert(String.format("%s seleccionada", item.getTitle()));
         return super.onOptionsItemSelected(item);
     }
 
+    /**
+     * Shows a toast message on the screen.
+     * @param msg The message to show.
+     */
     private void alert(String msg) {
         Toast.makeText(
             this,
@@ -98,5 +112,23 @@ public class MainActivity extends AppCompatActivity {
         int nightModeFlags = this.getResources().getConfiguration().uiMode &
                 Configuration.UI_MODE_NIGHT_MASK;
         return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
+    }
+
+    // TOOLS
+
+    /**
+     * Checks if the given integer is the the given array.
+     * @param id The integer to check.
+     * @param ids The array to check.
+     * @return True if the integer is in the array.
+     */
+    private boolean any(int id, int[] ids){
+        if (ids == null)
+            return false;
+        for (int j : ids) {
+            if (id == j)
+                return true;
+        }
+        return false;
     }
 }
