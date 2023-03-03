@@ -1,7 +1,9 @@
 package com.example.a13_menu01;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -9,6 +11,8 @@ import android.widget.CheckBox;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+
+    MenuItem modoNocturno;
 
     /*
     En este ejemplo vamos a ver como podemos trabajar con un menu de
@@ -39,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
+        modoNocturno = menu.findItem(R.id.modo_nocturno);
+        modoNocturno.setChecked(darkMode());
         return true;
     }
 
@@ -50,12 +56,13 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.edit_action) {
-            String texto = "Ha pulsado" + item.getTitle().toString();
-            Toast.makeText(this,texto,Toast.LENGTH_SHORT).show();
-            return true;
+            alert("Ha pulsado " + item.getTitle().toString());
         }else if(id == R.id.modo_nocturno){
-            Toast.makeText(this,"Modo nocturno Pulsado!",Toast.LENGTH_SHORT).show();
-            item.setChecked(!item.isChecked());
+            if (item.isChecked())
+                alert("Activando modo nocturno!");
+            else
+                alert("Desactivando modo nocturno!");
+            toggleDarkLightMode();
             return true;
         }else if(id == R.id.op1){
             Toast.makeText(this,"Opcion 1 elegida!",Toast.LENGTH_SHORT).show();
@@ -63,5 +70,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void alert(String msg) {
+        Toast.makeText(
+            this,
+            msg,
+            Toast.LENGTH_SHORT
+        ).show();
+    }
+
+    /**
+     * Toggle between dark and light mode.
+     */
+    protected void toggleDarkLightMode() {
+        if (darkMode())
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+        else
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+    }
+
+    /**
+     * Check if the current mode is dark.
+     * @return True if the current mode is dark.
+     */
+    protected boolean darkMode() {
+        int nightModeFlags = this.getResources().getConfiguration().uiMode &
+                Configuration.UI_MODE_NIGHT_MASK;
+        return nightModeFlags == Configuration.UI_MODE_NIGHT_YES;
     }
 }
